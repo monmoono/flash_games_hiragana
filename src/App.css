@@ -238,6 +238,25 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: start;
+
+    /* Add scrolling */
+    max-height: 400px;
+    /* Adjust height as needed */
+    overflow-y: auto;
+  }
+
+  /* Optional: Customize scrollbar for better appearance */
+  .dropdown-menu::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .dropdown-menu::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+  }
+
+  .dropdown-menu::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
   }
 
   .row-option {
