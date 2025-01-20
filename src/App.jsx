@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { hiraganaRows } from "./hiraganaData";
 import FlashCard from "./components/FlashCard";
 import "./App.css";
@@ -7,8 +7,23 @@ const App = () => {
   const [selectedRows, setSelectedRows] = useState([]);
   const [shuffledCards, setShuffledCards] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const [resetTrigger, setResetTrigger] = useState(0);
+
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const shuffleCards = () => {
     let cards = [];
@@ -36,6 +51,7 @@ const App = () => {
         ? prev.filter((row) => row !== rowName)
         : [...prev, rowName]
     );
+    resetGame();
   };
 
   const toggleSelectAll = () => {
@@ -44,6 +60,7 @@ const App = () => {
     } else {
       setSelectedRows(Object.keys(hiraganaRows)); // Select all otherwise
     }
+    resetGame();
   };
 
   // รวมตัวอักษรจากแถวที่เลือก
@@ -88,7 +105,7 @@ const App = () => {
         {/* แสดง Flash Cards */}
         <div className="card-grid">
           {!gameStarted ? selectedCharacters.map(({ char, romaji }) => (
-             <FlashCard key={char} character={char} romaji={romaji} isGameStarted={gameStarted} resetTrigger={resetTrigger} />
+            <FlashCard key={char} character={char} romaji={romaji} isGameStarted={gameStarted} resetTrigger={resetTrigger} />
           ))
             : shuffledCards.map(({ char, romaji }) => (
               <FlashCard key={char} character={char} romaji={romaji} isGameStarted={gameStarted} resetTrigger={resetTrigger} />
@@ -102,7 +119,7 @@ const App = () => {
           เลือกแถว
         </button>
         {isDropdownOpen && (
-          <div className="dropdown-menu">
+          <div className={"dropdown-menu"} ref={dropdownRef}>
             <button onClick={toggleSelectAll}>
               {selectedRows.length === Object.keys(hiraganaRows).length ? "Clear All" : "Select All"}
             </button>
