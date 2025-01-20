@@ -8,6 +8,7 @@ const App = () => {
   const [shuffledCards, setShuffledCards] = useState([]);
   const [gameStarted, setGameStarted] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [resetTrigger, setResetTrigger] = useState(0);
 
   const shuffleCards = () => {
     let cards = [];
@@ -25,6 +26,7 @@ const App = () => {
   const resetGame = () => {
     setGameStarted(false);
     setShuffledCards([]);
+    setResetTrigger((prev) => prev + 1);
   };
 
   // ฟังก์ชันเลือกแถว
@@ -86,16 +88,15 @@ const App = () => {
         {/* แสดง Flash Cards */}
         <div className="card-grid">
           {!gameStarted ? selectedCharacters.map(({ char, romaji }) => (
-            <FlashCard key={char} character={char} romaji={romaji} isGameStarted={gameStarted} />
+             <FlashCard key={char} character={char} romaji={romaji} isGameStarted={gameStarted} resetTrigger={resetTrigger} />
           ))
             : shuffledCards.map(({ char, romaji }) => (
-              <FlashCard key={char} character={char} romaji={romaji} isGameStarted={gameStarted} />
+              <FlashCard key={char} character={char} romaji={romaji} isGameStarted={gameStarted} resetTrigger={resetTrigger} />
             ))
           }
         </div>
       </div>
 
-      {/* <div className={selectedRows.length > 0 ? "floating-dropdown" : "floating-dropdown-mobile"} > */}
       <div className={"floating-dropdown"} >
         <button className="dropdown-button" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
           เลือกแถว
