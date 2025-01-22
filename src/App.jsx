@@ -44,6 +44,17 @@ const App = () => {
     setResetTrigger((prev) => prev + 1);
   };
 
+  const restartGame = () => {
+    setGameStarted(false);
+    setShuffledCards([]);
+    setResetTrigger((prev) => prev + 1);
+
+    // ให้รอจน state อัปเดตแล้วเริ่มเกมใหม่
+    setTimeout(() => {
+      shuffleCards();
+    }, 100);
+  };
+
   // ฟังก์ชันเลือกแถว
   const toggleRow = (rowName) => {
     setSelectedRows((prev) =>
@@ -75,6 +86,9 @@ const App = () => {
         </button>
         <button onClick={resetGame} disabled={!gameStarted}>
           รีเซ็ตเกม
+        </button>
+        <button onClick={restartGame} disabled={!gameStarted}>
+          เล่นอีกครั้ง
         </button>
       </div>
       <div className="sub-contanier">
