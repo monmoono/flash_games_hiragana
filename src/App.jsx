@@ -119,13 +119,15 @@ const App = () => {
 
         {/* แสดง Flash Cards */}
         <div className="card-grid">
-          {!gameStarted ? selectedCharacters.map(({ char, romaji }) => (
-            <FlashCard key={char} character={char} romaji={romaji} isGameStarted={gameStarted} resetTrigger={resetTrigger} />
-          ))
-            : shuffledCards.map(({ char, romaji }) => (
-              <FlashCard key={char} character={char} romaji={romaji} isGameStarted={gameStarted} resetTrigger={resetTrigger} />
-            ))
-          }
+          {(gameStarted ? shuffledCards : selectedCharacters).map(({ char, romaji }, index) => (
+            <FlashCard
+              key={char}
+              character={char}
+              romaji={romaji}
+              isGameStarted={gameStarted}
+              resetTrigger={resetTrigger}
+            />
+          ))}
         </div>
       </div>
 
