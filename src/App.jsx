@@ -26,6 +26,7 @@ const App = () => {
   }, []);
 
   const shuffleCards = () => {
+    resetGame();
     let cards = [];
     selectedRows.forEach((rowName) => {
       cards = [...cards, ...hiraganaRows[rowName]];
