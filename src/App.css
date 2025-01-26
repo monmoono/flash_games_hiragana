@@ -101,7 +101,7 @@ h1 {
   font-size: 18px;
 }
 
-.card-flex {
+.card-flex,.card-grid,.card-grid-2 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
