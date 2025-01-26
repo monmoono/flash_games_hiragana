@@ -118,7 +118,12 @@ const App = () => {
 
 
         {/* แสดง Flash Cards */}
-        <div className="card-grid">
+        <div className={`${selectedRows.length > 6
+            ? "card-grid-2 small-cards-2"
+            : selectedRows.length > 3
+              ? "card-grid small-cards"
+              : "card-flex"
+          }`}>
           {(gameStarted ? shuffledCards : selectedCharacters).map(({ char, romaji }, index) => (
             <FlashCard
               key={char}
@@ -153,7 +158,7 @@ const App = () => {
           </div>
         )}
       </div>
-    </div>
+    </div >
   );
 };
 

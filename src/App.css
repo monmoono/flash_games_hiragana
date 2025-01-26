@@ -101,7 +101,7 @@ h1 {
   font-size: 18px;
 }
 
-.card-grid {
+.card-flex {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -204,7 +204,7 @@ button {
     font-size: 16px;
   }
 
-  .card-grid {
+  .card-flex {
     width: 100%;
     justify-content: center;
   }
@@ -303,5 +303,31 @@ button {
     cursor: pointer;
   }
 
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+
+  .small-cards .card,
+  .small-cards .card-start {
+    width: 30px;
+    height: 30px;
+  }
+
+  .card-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .small-cards-2 .card,
+  .small-cards-2 .card-start {
+    width: 10px;
+    height: 10px;
+  }
 
 }
